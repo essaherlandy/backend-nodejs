@@ -6,14 +6,13 @@ const sequelize = require('./database/db');
 dotenv.config();
 
 const app = express();
-const port = 3000;
 
 app.use(express.json()); //middleware untuk parsing json
 
 app.use('/api/auth', authRoutes);
 
 sequelize.sync({ alter: true }).then(() => {
-    app.listen(port, () => {
-        console.log(`Server is running at http://localhost:${port}`);
+    app.listen(process.env.PORT, () => {
+        console.log(`Server is running at ${process.env.HOST}:${process.env.PORT}`);
     });
 });
